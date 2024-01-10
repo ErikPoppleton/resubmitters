@@ -7,11 +7,12 @@ Help()
     echo "Create a gromacs job with multiple iterations queued as Slurm dependencies"
     echo
     echo "Syntax:"
-    echo "resubmit_gromacs.sh niter time_limit job_name nnodes tpn-cpt-tpc-gpus path/to/tpr_file deffnm continuation(yes|no) path/to/run_dir submit(yes|no)"
+    echo "resubmit_gromacs.sh niter time_limit job_name nnodes tpn-cpt-tpc-gpus path/to/tpr_file deffnm path/to/run_dir continuation(yes|no) submit(yes|no)"
     echo
     echo "Notes:"
     echo "task/cpu/thread/gpu allocation is a - separated list. e.g. 32-1-1-1 32 mpi processes, 1 omp thread/mpi proc, no hyperthreading, 1 gpu."
-    echo "If this is a continuation, the checkpoint (.cpi) file must be in the run directory and be named deffnm.cpi."
+    echo "If this is a continuation, the checkpoint (.cpt
+) file must be in the run directory and be named deffnm.cpt."
     echo "The continuation and submit options must be 'yes' or 'no'"
 }
     
@@ -37,8 +38,8 @@ nnodes=$4
 cpus=$5 #  mpi_task_per_node - cpus-per-task - task_per_core - n_gpus  (e.g. 32-1-1-1 32 mpi processes, 1 omp thread/mpi proc, total gpus, no hyperthreading  20-4-2 20 mpi processes, 4 omp threads with hyperthreading)
 tpr=$6 # TPR FILE
 deffnm=$7
-continuation=$8 # yes= iteration 1 starts from cpt, no= iteration 1 does not start from cpt
-outdir=$9 # absolute path
+outdir=$8 # absolute path
+continuation=$9 # yes= iteration 1 starts from cpt, no= iteration 1 does not start from cpt
 submit=${10} # yes or no submit the jobs or not
 
 
