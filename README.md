@@ -21,7 +21,7 @@ Run `resubmit_gromacs.sh -h` to print the help to the cli.
 
 #### Notes
 * The continuation and submit options must be 'yes' or 'no'.
-* If continuing a simulation, your .cpt file must be named <deffnm>.cpt.
+* If continuing a simulation, your .cpt file must be named \<deffnm>.cpt.
 * gmx_mpi must be on your $PATH (if using just gmx or you have a path, edit the script).
 
 ### Resubmitting serial oxDNA jobs
