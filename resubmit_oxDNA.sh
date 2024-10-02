@@ -50,10 +50,13 @@ cat>jobscript_$iter<<EOF
 # Standard output and error:
 #SBATCH -o slurm.%j.out
 #SBATCH -e slurm.%j.err
+
 # Initial working directory:
 #SBATCH -D $outdir
+
 # Job Name:
 #SBATCH -J $jobname
+
 # Queue (Partition):
 #SBATCH --partition=gpu
 
@@ -70,9 +73,10 @@ cat>jobscript_$iter<<EOF
 #SBATCH --constraint="gpu"
 #SBATCH --gres=gpu:1
 
-#
+# Uncomment these lines if you want emails
 ##SBATCH --mail-type=ALL
-##SBATCH --mail-user=erik.poppleton@mr.mpg.de
+##SBATCH --mail-user=youremail@email.edu
+
 # Wall clock limit:
 #SBATCH --time=$wall_clock_limit
 

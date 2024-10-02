@@ -1,6 +1,7 @@
 # script to create a job with iterations to run gromacs
 # Creates a slurm/sbatch script inside the domain dir that launches different srun 
 # commands in many nodes, using 1 Node and 1GPU/node for each replica.
+# Written by Erik Poppleton and Camilo Aponte-Santamaria
 
 Help()
 {
@@ -66,10 +67,13 @@ cat>jobscript_$iter<<EOF
 # Standard output and error:
 #SBATCH -o $outdir/slurm.%j.out
 #SBATCH -e $outdir/slurm.%j.err
+
 # Initial working directory:
 #SBATCH -D $outdir
+
 # Job Name:
 #SBATCH -J $jobname
+
 # Queue (Partition):
 #SBATCH --partition=gpu
 
@@ -79,26 +83,26 @@ cat>jobscript_$iter<<EOF
 #SBATCH --cpus-per-task=$cpt
 #SBATCH --threads-per-core=$tpc
 
-# Request say 32 GB of main Memory per node in Units of MB:
+# Request 32 GB of main Memory per node in Units of MB:
 #SBATCH --mem=32000
 
 # GPU stuff
 #SBATCH --constraint="gpu"
 #SBATCH --gres=gpu:$gpu
 
+# Uncomment these lines if you want emails
 ##SBATCH --mail-type=ALL
-##SBATCH --mail-user=ca.aponte@uniandes.edu.co
+##SBATCH --mail-user=youremail@email.edu
+
 # Wall clock limit:
 #SBATCH --time=$wall_clock_limit
 
-
-# Run the program:
 # For pinning threads correctly:
 export OMP_PLACES=cores
-export SLURM_HINT=multithread
 export GMX_ENABLE_DIRECT_GPU_COMM=1
 export GMX_GPU_PME_DECOMPOSITION=1 
 
+# Set your GROMACS version here
 module load gromacs/2023.3
 
 n_tasks=$((nnodes*tpn))

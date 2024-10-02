@@ -1,4 +1,5 @@
 # script to create a job with iterations to run multiple oxDNA simulations on a single GPU
+# Written by Erik Poppleton based on the GROMACS script by Camilo Aponte-Santamaria
 
 Help()
 {
@@ -31,7 +32,7 @@ if [[ $# -ne 9 ]]; then
 fi
 
 
-Niter=$1 # number of iterations (max 8)
+Niter=$1 # number of iterations
 wall_clock_limit=$2  # time per iteration. Format: hh:mm:ss
 jobname=$3 #name in the queue
 input=$4 # input FILE
@@ -53,6 +54,7 @@ cat>jobscript_$iter<<EOF
 # Standard output and error:
 #SBATCH -o slurm.%j.out
 #SBATCH -e slurm.%j.err
+
 # Initial working directory:
 #SBATCH -D $outdir
 
@@ -71,9 +73,10 @@ cat>jobscript_$iter<<EOF
 #SBATCH --constraint="gpu"
 #SBATCH --gres=gpu:1
 
-#
+# Uncomment these lines if you want emails
 ##SBATCH --mail-type=ALL
-##SBATCH --mail-user=erik.poppleton@mr.mpg.de
+##SBATCH --mail-user=youremail@email.edu
+
 # Wall clock limit:
 #SBATCH --time=$wall_clock_limit
 
