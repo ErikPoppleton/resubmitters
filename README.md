@@ -1,7 +1,7 @@
 # resubmitters
 Resubmit your MD simulations automatically
 
-Based on a GROMACS resubmission script by Dr. Camillo Aponte-Santamaria.  These scripts will automatically queue multiple days of GROMACS or oxDNA simulations using Slurm dependencies for simulations that take longer than common 24-hour wall times.
+Based on a GROMACS resubmission script by Dr. Camilo Aponte-Santamaria.  These scripts will automatically queue multiple days of GROMACS or oxDNA simulations using Slurm dependencies for simulations that take longer than common 24-hour wall times.
 
 ### Resubmitting GROMACS jobs
 `resubmit_gromacs.sh` has the following 10 required arguments:
@@ -21,7 +21,7 @@ Run `resubmit_gromacs.sh -h` to print the help to the cli.
 
 #### Notes
 * The continuation and submit options must be 'yes' or 'no'.
-* If continuing a simulation, your .cpt file must be named <deffnm>.cpt.
+* If continuing a simulation, your .cpt file must be named \<deffnm>.cpt.
 * gmx_mpi must be on your $PATH (if using just gmx or you have a path, edit the script).
 
 ### Resubmitting serial oxDNA jobs
